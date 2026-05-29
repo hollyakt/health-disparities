@@ -52,15 +52,13 @@ pip install -r requirements.txt
 ## Usage
 
 ```bash
-# Download and preprocess data
-python src/download_data.py --output_dir data/
-
-# Run full analysis pipeline
+# Run the analysis pipeline (expects CDC/CMS source files under data/)
 python src/analyze.py --data_dir data/ --output figures/
-
-# Launch interactive dashboard
-python src/dashboard.py
 ```
+
+Data acquisition is currently manual — pull BRFSS, CMS Chronic Conditions
+Warehouse, CDC Wonder, and County Health Rankings extracts into `data/`
+before running. An automated `download_data.py` is on the roadmap.
 
 ---
 
@@ -69,16 +67,19 @@ python src/dashboard.py
 ```
 health-disparities/
 ├── src/
-│   ├── download_data.py     # Automated CDC/CMS data download
-│   ├── preprocess.py        # Data cleaning and merging
-│   ├── analyze.py           # Statistical analysis
-│   └── dashboard.py         # Interactive Plotly Dash app
+│   └── analyze.py           # Statistical analysis + figure generation
 ├── notebooks/
 │   └── 01_disparities_analysis.ipynb
-├── data/                    # Downloaded data (not tracked)
+├── data/                    # Source extracts (not tracked)
 ├── figures/
 └── requirements.txt
 ```
+
+### Roadmap
+
+- `src/download_data.py` — automated CDC/CMS pull
+- `src/preprocess.py` — cleaning + merging layer split out of `analyze.py`
+- `src/dashboard.py` — interactive Plotly Dash front-end
 
 ---
 
